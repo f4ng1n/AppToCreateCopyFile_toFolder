@@ -1,4 +1,4 @@
-import os,shutil,os.path, sys,errno
+import os,shutil,os.path, sys
 from tkinter import *
 from tkinter.filedialog import asksaveasfile
 from tkinter import messagebox,filedialog
