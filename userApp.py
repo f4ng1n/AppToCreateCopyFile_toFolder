@@ -50,27 +50,35 @@ buttonWr = Button(app)
 buttonWr.config(text="Save",command = wrFile)
 buttonWr.grid(row=5, column=1,sticky='W')
 
-#========Browse to copy file to folder================
+#========Browse to copy that defined file to folder================
 def browseBtnCopy():  #  Button to browse _Copy
     global copy_path
     askDirectoryCopy = filedialog.askdirectory()
     copy_path.set(askDirectoryCopy)
     os.chdir(askDirectoryCopy)
 butBrsCopy = Button(app, text='Choose directory to copy',command=browseBtnCopy)
-#=========Copy file to another folder=================
+#=========Copy defined file to another folder=================
 src = "C:/Users/phanh/source/repos/Lab1/private"
 dst = "C:/Users/phanh/source/repos/Lab1/public"
 def copyFile():
-    shutil.copy(src+"/"+var.get()+".txt",dst)
-    if os.path.isfile(var.get()+'.txt'):
+    shutil.copy(src+"/"+varCopy.get()+".txt",dst)
+    if os.path.isfile(varCopy.get()+'.txt'):
         messagebox.showinfo("User Application","Successfully copy file to another folder!") #check if file exists or not, show messagebox!
-    else:
-        print("File not exist! Try again!")
+    else: 
+        messagebox.showerror("File not exist! Try again!")
 butCopy = Button(app, text='Copy',command=copyFile)
-butCopy.grid(row=7, column=1, sticky='W')
+butCopy.grid(row=9, column=1, sticky='W')
+
+label5 = Label(app, text="Enter name of file to be copied:")
+label5.grid(row=7,column=0,sticky='W')
+
+varCopy = StringVar()
+nameToCopy = Entry(app,textvariable=varCopy) #Entry to type name of file that you want to copy
+nameToCopy.grid(column=0,row=8,ipady=5,ipadx=5,sticky='W')
+
 #========Active Layout Window=============
 label3.grid(row=5, column=0,sticky='W')
-label4.grid(row=7,column=0,sticky='W')
+label4.grid(row=10,column=0,sticky='W')
 butBrsSv.grid(row=4, column=0,sticky='W')
-butBrsCopy.grid(row=6, column=0,sticky='W')
+butBrsCopy.grid(row=9, column=0,sticky='W')
 app.mainloop()
