@@ -58,14 +58,17 @@ def browseBtnCopy():  #  Button to browse _Copy
     os.chdir(askDirectoryCopy)
 butBrsCopy = Button(app, text='Choose directory to copy',command=browseBtnCopy)
 #=========Copy defined file to another folder=================
-src = "C:/Users/phanh/source/repos/Lab1/private"
-dst = "C:/Users/phanh/source/repos/Lab1/public"
+src = "C:/Users/phanh/source/repos/Lab1/private/"
+dst = "C:/Users/phanh/source/repos/Lab1/public/"
 def copyFile():
-    shutil.copy(src+"/"+varCopy.get()+".txt",dst)
-    if os.path.isfile(varCopy.get()+'.txt'):
-        messagebox.showinfo("User Application","Successfully copy file to another folder!") #check if file exists or not, show messagebox!
-    else: 
-        messagebox.showerror("File not exist! Try again!")
+    res = os.path.exists(src+varCopy.get()+'.txt')
+    if res is False:
+        messagebox.showerror("User Application","No such file or directory! Type again!")
+    else:
+        shutil.copy(src+varCopy.get()+'.txt',dst)
+        if os.path.isfile(dst+varCopy.get()+'.txt'):
+            messagebox.showinfo("User Application","Successfully copy file to another folder!") #check if file exists or not, show messagebox!
+        
 butCopy = Button(app, text='Copy',command=copyFile)
 butCopy.grid(row=9, column=1, sticky='W')
 
